@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_inicio">
+
+    <fragment
+        android:id="@+id/nav_inicio"
+        android:name="com.mva.inmobiliariaalaniz.ui.inicio.InicioFragment"
+        android:label="@string/menu_inicio"
+        tools:layout="@layout/fragment_inicio" />
+
+    <fragment
+        android:id="@+id/nav_perfil"
+        android:name="com.mva.inmobiliariaalaniz.ui.perfil.PerfilFragment"
+        android:label="@string/menu_perfil"
+        tools:layout="@layout/fragment_perfil" />
+
+    <fragment
+        android:id="@+id/nav_inmuebles"
+        android:name="com.mva.inmobiliariaalaniz.ui.inmuebles.InmueblesFragment"
+        android:label="@string/menu_inmuebles"
+        tools:layout="@layout/fragment_inmuebles" >
+        <action
+            android:id="@+id/action_nav_inmuebles_to_nav_inmueble_detalle"
+            app:destination="@id/nav_inmueble_detalle" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_inmueble_detalle"
+        android:name="com.mva.inmobiliariaalaniz.ui.inmuebles.InmuebleDetalleFragment"
+        android:label="Inmueble"
+        tools:layout="@layout/fragment_inmueble_detalle" >
+        <action
+            android:id="@+id/action_nav_inmueble_detalle_to_nav_inmuebles"
+            app:destination="@id/nav_inmuebles" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_inquilinos"
+        android:name="com.mva.inmobiliariaalaniz.ui.inquilinos.InquilinosFragment"
+        android:label="@string/menu_inquilinos"
+        tools:layout="@layout/fragment_inquilinos" >
+        <action
+            android:id="@+id/action_nav_inquilinos_to_nav_inquilino_detalle"
+            app:destination="@id/nav_inquilino_detalle" />
+        <action
+            android:id="@+id/action_nav_inquilinos_to_nav_contratos"
+            app:destination="@id/nav_contratos" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_inquilino_detalle"
+        android:name="com.mva.inmobiliariaalaniz.ui.inquilinos.InquilinoDetalleFragment"
+        android:label="Inquilinos"
+        tools:layout="@layout/fragment_inquilino_detalle" >
+        <action
+            android:id="@+id/action_nav_inquilino_detalle_to_nav_inquilinos"
+            app:destination="@id/nav_inquilinos" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_contratos"
+        android:name="com.mva.inmobiliariaalaniz.ui.contratos.ContratosDetallesFragment"
+        android:label="@string/menu_contratos"
+        tools:layout="@layout/fragment_contratos" >
+        <action
+            android:id="@+id/action_nav_contratos_to_nav_inquilinos2"
+            app:destination="@id/nav_inquilinos" />
+        <action
+            android:id="@+id/action_nav_contratos_to_nav_pago"
+            app:destination="@id/nav_pago" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_pago"
+        android:name="com.mva.inmobiliariaalaniz.ui.contratos.PagoFragment"
+        android:label="Pago"
+        tools:layout="@layout/fragment_pago" >
+        <action
+            android:id="@+id/action_nav_pago_to_nav_contratos"
+            app:destination="@id/nav_contratos" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.mva.inmobiliariaalaniz.ui.logOut.LogOutFragment"
+        android:label="@string/menu_logOut"
+        tools:layout="@layout/fragment_logout" />
+</navigation>
