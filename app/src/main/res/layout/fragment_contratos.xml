@@ -184,20 +184,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tvC6"
         android:textAlignment="center" />
 
-    <Button
-        android:id="@+id/btPago"
-        android:layout_width="128dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="10dp"
-        android:text="Ver Pagos"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvInmContrato"
-        app:layout_constraintVertical_bias="0.362"
-        tools:ignore="MissingConstraints" />
-
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="wrap_content"

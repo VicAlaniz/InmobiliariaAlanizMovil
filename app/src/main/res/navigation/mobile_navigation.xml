@@ -15,7 +15,10 @@
         android:id="@+id/nav_perfil"
         android:name="com.mva.inmobiliariaalaniz.ui.perfil.PerfilFragment"
         android:label="@string/menu_perfil"
-        tools:layout="@layout/fragment_perfil" />
+        tools:layout="@layout/fragment_perfil" >
+
+    </fragment>
+
 
     <fragment
         android:id="@+id/nav_inmuebles"
@@ -25,6 +28,18 @@
         <action
             android:id="@+id/action_nav_inmuebles_to_nav_inmueble_detalle"
             app:destination="@id/nav_inmueble_detalle" />
+        <action
+            android:id="@+id/action_nav_inmuebles_to_nav_agregar_inmueble"
+            app:destination="@id/nav_agregar_inmueble" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_agregar_inmueble"
+        android:name="com.mva.inmobiliariaalaniz.ui.inmuebles.AgregarInmuebleFragment"
+        android:label="Agregar Inmueble"
+        tools:layout="@layout/fragment_agregar_inmueble" >
+        <action
+            android:id="@+id/action_nav_agregar_inmueble_to_nav_inmuebles"
+            app:destination="@id/nav_inmuebles" />
     </fragment>
     <fragment
         android:id="@+id/nav_inmueble_detalle"
@@ -64,19 +79,9 @@
         <action
             android:id="@+id/action_nav_contratos_to_nav_inquilinos2"
             app:destination="@id/nav_inquilinos" />
-        <action
-            android:id="@+id/action_nav_contratos_to_nav_pago"
-            app:destination="@id/nav_pago" />
+
     </fragment>
-    <fragment
-        android:id="@+id/nav_pago"
-        android:name="com.mva.inmobiliariaalaniz.ui.contratos.PagoFragment"
-        android:label="Pago"
-        tools:layout="@layout/fragment_pago" >
-        <action
-            android:id="@+id/action_nav_pago_to_nav_contratos"
-            app:destination="@id/nav_contratos" />
-    </fragment>
+
     <fragment
         android:id="@+id/nav_logout"
         android:name="com.mva.inmobiliariaalaniz.ui.logOut.LogOutFragment"

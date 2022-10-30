@@ -2,6 +2,7 @@ package com.mva.inmobiliariaalaniz.ui.inicio;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.util.Log;
@@ -64,6 +65,16 @@ public class LeerMapa implements OnMapReadyCallback {
                             .build();
                     CameraUpdate caULP= CameraUpdateFactory.newCameraPosition(camUlp);
                     map.animateCamera(caULP);
+                    Projection proj = map.getProjection();
+                    android.graphics.Point coor= proj.toScreenLocation(ua);
+                    SharedPreferences sp= context.getSharedPreferences("ubicacion",0);
+                    SharedPreferences.Editor editor=sp.edit();
+                    Float lat = new Float(ua.latitude);
+                    Float longi = new Float(ua.longitude);
+
+                    editor.putFloat("coordenadax",lat);
+                    editor.putFloat("coordenaday",longi);
+                    editor.commit();
                     map.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                         @Override
                         public void onMapClick(@NonNull LatLng latLng) {
@@ -72,12 +83,29 @@ public class LeerMapa implements OnMapReadyCallback {
                             map.addMarker(new MarkerOptions().position(latLng))
 
                                     .setTitle("Nuevo");
-                            Log.d("salida",coor.x +"   "+coor.y);
+                            SharedPreferences sp= context.getSharedPreferences("ubicacion",0);
+                            SharedPreferences.Editor editor=sp.edit();
+                            Float lat = new Float(latLng.latitude);
+                            Float longi = new Float(latLng.longitude);
+
+                            editor.putFloat("coordenadax",lat);
+                            editor.putFloat("coordenaday",longi);
+                            editor.commit();
+
 
                         }
                     });
+                }else{
+                    SharedPreferences sp= context.getSharedPreferences("ubicacion",0);
+                    SharedPreferences.Editor editor=sp.edit();
+                    Float lat = -33.30312F;
+                    Float longi = -66.34572F;
+
+                    editor.putFloat("coordenadax",lat);
+                    editor.putFloat("coordenaday",longi);
+                    editor.commit();
                 }
-            }
+                }
         });
     }
 

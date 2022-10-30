@@ -19,16 +19,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mva.inmobiliariaalaniz.R;
 
-import com.mva.inmobiliariaalaniz.MainActivity;
-import com.mva.inmobiliariaalaniz.request.ApiClient;
-
 public class LoginActivity extends AppCompatActivity {
     private EditText etUsuario,etPassword;
-    private Button btLogin;
-    private ApiClient api  = ApiClient.getApi();;
+    private Button btLogin, btCambiarClave;
     private LoginViewModel vmLogin;
     private TextView tvError;
     private SensorManager sensorManager;
@@ -73,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
         etUsuario =findViewById(R.id.etUsuario);
         etPassword= findViewById(R.id.etPassword);
         tvError= findViewById(R.id.tvError);
+        btCambiarClave = findViewById(R.id.btCambiarClave);
         btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,6 +92,17 @@ public class LoginActivity extends AppCompatActivity {
                 tvError.setVisibility(View.INVISIBLE);
             }
         });
+        btCambiarClave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(etUsuario.getText().toString().equals("") || etUsuario.getText().toString()==null ){
+                    Toast.makeText(context, "Debe ingresar un email", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    vmLogin.reestablecerClave(etUsuario.getText().toString());
+                }
+            }
+        });
     }
     @Override
     protected void onStop() {
@@ -107,8 +116,6 @@ public class LoginActivity extends AppCompatActivity {
         sensorManager.unregisterListener(leerSensor);
     }
     private class LeerSensor implements SensorEventListener {
-
-        //private Context contexto;
 
         public LeerSensor(Context contexto) {
             context = contexto;
@@ -129,5 +136,7 @@ public class LoginActivity extends AppCompatActivity {
 
         }
     }
+
+
 
 }

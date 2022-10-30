@@ -1,5 +1,7 @@
 package com.mva.inmobiliariaalaniz.ui.inmuebles;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mva.inmobiliariaalaniz.R;
 import com.mva.inmobiliariaalaniz.adapter.InmuebleAdapter;
 import com.mva.inmobiliariaalaniz.databinding.FragmentInmueblesBinding;
@@ -25,6 +29,8 @@ public class InmueblesFragment extends Fragment {
     private InmueblesViewModel vm;
     private RecyclerView rvInmuebles;
     private List<Inmueble> listaInmuebles;
+    private FloatingActionButton fabAgregar;
+    private Context context;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -46,6 +52,15 @@ public class InmueblesFragment extends Fragment {
     }
     private void inicializarVista(View view){
         rvInmuebles =view.findViewById(R.id.rvInmueble);
+
+        fabAgregar = view.findViewById(R.id.fabAgregar);
+        fabAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.nav_agregar_inmueble);
+
+            }
+        });
         vm.obtenerInmuebles();
     }
 

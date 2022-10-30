@@ -232,7 +232,7 @@
             android:id="@+id/btEditar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
             android:text="Editar"
             android:textStyle="bold"
             app:iconTint="#00BCD4"

@@ -1,6 +1,7 @@
 package com.mva.inmobiliariaalaniz;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,8 +9,10 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -21,8 +24,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.mva.inmobiliariaalaniz.databinding.ActivityMainBinding;
 import com.mva.inmobiliariaalaniz.modelo.Propietario;
-import com.mva.inmobiliariaalaniz.request.ApiClient;
-import com.mva.inmobiliariaalaniz.ui.perfil.PerfilViewModel;
+import com.mva.inmobiliariaalaniz.request.ApiRetrofit;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -85,9 +91,31 @@ public class MainActivity extends AppCompatActivity {
         ImageView ivAvatar = header.findViewById(R.id.ivAvatarMenu);
         TextView tvNombre = header.findViewById(R.id.tvNombreMenu);
         TextView tvMail = header.findViewById(R.id.tvMailDetalleMenu);
-        Propietario p = ApiClient.getApi().obtenerUsuarioActual();
-        ivAvatar.setImageResource(p.getAvatar());
-        tvNombre.setText(p.getNombre()+" "+p.getApellido());
-        tvMail.setText(p.getEmail());
+        SharedPreferences sp = getSharedPreferences("token",0);
+        String token = sp.getString("token",null);
+        Call<Propietario> promesaPropietario = ApiRetrofit.getServiceInmobiliaria().obtenerPerfil(token);
+        promesaPropietario.enqueue(new Callback<Propietario>() {
+            @Override
+            public void onResponse(Call<Propietario> call, Response<Propietario> response) {
+                if(response.isSuccessful()){
+                    Propietario propietario = response.body();
+                    tvNombre.setText(propietario.getNombre());
+                    tvMail.setText(propietario.getEmail());
+                    Glide.with(navigationView.getContext())
+                            .load(propietario.getImgPerfil())
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .into(ivAvatar);
+                    SharedPreferences sp= getApplication().getSharedPreferences("propietarioActual",0);
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putInt("id",response.body().getId());
+                    editor.commit();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Propietario> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Error de conexión", Toast.LENGTH_SHORT).show();
+            }
+        }) ;
     }
 }

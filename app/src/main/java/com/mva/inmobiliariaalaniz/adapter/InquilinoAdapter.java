@@ -18,8 +18,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.mva.inmobiliariaalaniz.R;
 import com.mva.inmobiliariaalaniz.modelo.Inmueble;
 
-import com.mva.inmobiliariaalaniz.request.ApiClient;
-
 import java.util.List;
 
 public class InquilinoAdapter extends RecyclerView.Adapter<InquilinoAdapter.ViewHolder>{

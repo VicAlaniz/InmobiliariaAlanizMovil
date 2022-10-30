@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mva.inmobiliariaalaniz.R;
 import com.mva.inmobiliariaalaniz.modelo.Inmueble;
 
@@ -26,6 +27,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
         private List<Inmueble> listaInmuebles;
         private Context contexto;
         private LayoutInflater li;
+        private FloatingActionButton fbAgregar;
 
 
     public InmuebleAdapter(List<Inmueble> lista, Context context, LayoutInflater layoutInflater) {
@@ -46,7 +48,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.ViewHo
         Inmueble inmueble = listaInmuebles.get(position);
         holder.tvDireccion.setText(inmueble.getDireccion());
         holder.tvPrecio.setText(inmueble.getPrecio()+"");
-        //holder.ivInmueble.setImageResource(inmueble.getImagen());
+
         Glide.with(contexto)
                 .load(listaInmuebles.get(position).getImagen())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

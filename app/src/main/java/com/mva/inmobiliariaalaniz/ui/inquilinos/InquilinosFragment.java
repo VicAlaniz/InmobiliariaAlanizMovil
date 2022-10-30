@@ -36,8 +36,7 @@ public class InquilinosFragment extends Fragment {
         vm = new ViewModelProvider(this).get(InquilinosViewModel.class);
 
         View view = inflater.inflate(R.layout.fragment_inquilinos, container, false);
-        //binding = FragmentInquilinosBinding.inflate(inflater, container, false);
-        //View view = binding.getRoot();
+
         vm.getMutableInmuebles().observe(getViewLifecycleOwner(), new Observer<List<Inmueble>>() {
             @Override
             public void onChanged(List<Inmueble> inmuebles) {

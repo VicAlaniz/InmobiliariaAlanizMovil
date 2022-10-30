@@ -39,10 +39,10 @@ public class InquilinoDetalleFragment extends Fragment {
         vmDetalle.getMutableInquilinos().observe(getViewLifecycleOwner(), new Observer<Inquilino>() {
             @Override
             public void onChanged(Inquilino inquilino) {
-                tvCodDetalle.setText(inquilino.getIdInquilino() + "");
+                tvCodDetalle.setText(inquilino.getId() + "");
                 tvNombreDetalle.setText(inquilino.getNombre());
                 tvApellidoDetalle.setText(inquilino.getApellido());
-                tvDniDetalle.setText(inquilino.getDNI() + "");
+                tvDniDetalle.setText(inquilino.getDni());
                 tvMailDetalle.setText(inquilino.getEmail());
                 tvTelefonoDetalle.setText(inquilino.getTelefono());
                 tvGaranteDetalle.setText(inquilino.getNombreGarante());

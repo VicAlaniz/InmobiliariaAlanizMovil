@@ -7,15 +7,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.mva.inmobiliariaalaniz.R;
-import com.mva.inmobiliariaalaniz.databinding.FragmentPerfilBinding;
 import com.mva.inmobiliariaalaniz.modelo.Propietario;
 
 public class PerfilFragment extends Fragment {
@@ -24,7 +25,7 @@ public class PerfilFragment extends Fragment {
     private EditText etCodigo,etNombre,etApellido,etDni,etEmail,etPass, etTel;
     private Button btEditar;
     private ImageView ivAvatar;
-    private int idAvatar;
+    private String idAvatar = "";
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -40,9 +41,13 @@ public class PerfilFragment extends Fragment {
                 etDni.setText(propietario.getDni()+"");
                 etEmail.setText(propietario.getEmail());
                 etTel.setText(propietario.getTelefono());
-                etPass.setText(propietario.getContraseña());
-                ivAvatar.setImageResource(propietario.getAvatar());
-                idAvatar= propietario.getAvatar();
+                etPass.setText(propietario.getClave());
+                Glide.with(getContext())
+                        .load(propietario.getImgPerfil())
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .into(ivAvatar);
+
+                idAvatar = propietario.getImgPerfil();
 
             }
         });
@@ -84,7 +89,7 @@ public class PerfilFragment extends Fragment {
                 int id = Integer.parseInt(etCodigo.getText().toString());
                 String nombre = etNombre.getText().toString();
                 String apellido = etApellido.getText().toString();
-                long dni = Long.parseLong(etDni.getText().toString());
+                String dni = etDni.getText().toString();
                 String tel = etTel.getText().toString();
                 String mail = etEmail.getText().toString();
                 String pass = etPass.getText().toString();
@@ -95,6 +100,7 @@ public class PerfilFragment extends Fragment {
 
             }
         });
+
     }
     @Override
     public void onDestroyView() {

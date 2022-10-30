@@ -46,8 +46,8 @@ public class InmuebleDetalleFragment extends Fragment {
         vmDetalle.getMutableInmuebles().observe(getViewLifecycleOwner(), new Observer<Inmueble>() {
             @Override
             public void onChanged(Inmueble inmueble) {
-                tvCodigoDetalle.setText(inmueble.getIdInmueble() + "");
-                tvAmbientesDetalle.setText(inmueble.getAmbientes() + "");
+                tvCodigoDetalle.setText(inmueble.getId() + "");
+                tvAmbientesDetalle.setText(inmueble.getCantAmbientes() + "");
                 tvDireccionDetalle.setText(inmueble.getDireccion());
                 tvPrecioDetalle.setText(inmueble.getPrecio() + "");
                 tvTipoDetalle.setText(inmueble.getTipo());
@@ -56,10 +56,10 @@ public class InmuebleDetalleFragment extends Fragment {
                 checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        vmDetalle.disponible(b);
+                        vmDetalle.disponible(checkBox.isChecked());
                     }
                 });
-                Glide.with(getContext())
+                Glide.with(view.getContext())
                         .load(inmueble.getImagen())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .into(ivAvatarDetalle);

@@ -24,7 +24,7 @@ public class ContratosDetallesFragment extends Fragment {
 
     private ContratosDetallesViewModel vmDetalle;
     private TextView tvCodigo, tvFechaIContrato, tvFechaFContrato, tvMontoAlquiler, tvInqContrato, tvInmContrato;
-    private Button btPago;
+
 
 
     public static ContratosDetallesFragment newInstance() {
@@ -40,20 +40,13 @@ public class ContratosDetallesFragment extends Fragment {
         vmDetalle.getMutableContrato().observe(getViewLifecycleOwner(), new Observer<Contrato>() {
             @Override
             public void onChanged(Contrato contrato) {
-                tvCodigo.setText(contrato.getIdContrato()+"");
+                tvCodigo.setText(contrato.getId()+"");
                 tvFechaIContrato.setText(contrato.getFechaInicio());
                 tvMontoAlquiler.setText(contrato.getMontoAlquiler()+"");
                 tvFechaFContrato.setText(contrato.getFechaFin());
                 tvInmContrato.setText("Dirección: "+ contrato.getInmueble().getDireccion());
                 tvInqContrato.setText(contrato.getInquilino().getNombre()+" "+contrato.getInquilino().getApellido());
-                btPago.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Bundle bundle = new Bundle();
-                        bundle.putSerializable("contrato", contrato );
-                        Navigation.findNavController(view).navigate(R.id.nav_pago, bundle);
-                    }
-                });
+
             }
         });
         inicializarVista(view);
@@ -67,7 +60,7 @@ public class ContratosDetallesFragment extends Fragment {
         tvFechaFContrato= view.findViewById(R.id.tvFechaFContrato);
         tvInmContrato= view.findViewById(R.id.tvInmContrato);
         tvInqContrato= view.findViewById(R.id.tvInqContrato);
-        btPago= view.findViewById(R.id.btPago);
+
         Bundle bundle = getArguments();
 
         vmDetalle.obtenerContrato(bundle);
